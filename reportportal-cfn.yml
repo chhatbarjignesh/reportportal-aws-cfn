@@ -458,7 +458,7 @@ Resources:
                 sudo chmod +x /usr/local/bin/docker-compose
                 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
                 sysctl -w vm.max_map_count=262144
-                curl --header 'PRIVATE-TOKEN: zfJGRpt7eEuZksQYu-zP' 'https://gitlab.com/api/v4/projects/18824153/repository/files/docker-compose.yml/raw?ref=v${ReportPortalVersion}' -o docker-compose.yml
+                curl https://raw.githubusercontent.com/chhatbarjignesh/reportportal-aws-cfn/v${ReportPortalVersion}/docker-compose.yml -o docker-compose.yml
                 sudo mkdir -p /var/data/elasticsearch/
                 sudo chmod g+rwx /var/data/elasticsearch/
                 chown -R 1000:1000 /var/data/elasticsearch/
