@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Desc  ription: "A template to deploy reportportal"
+Description: "A template to deploy reportportal"
 Parameters:
   ReportPortalVersion: # Version of ReportPortal you want to Deploy
     Type: String
