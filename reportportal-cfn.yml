@@ -62,7 +62,7 @@ Parameters:
   DeployWithDomain: # You want to deploy with Domain
     Description: Deploy with Domain, Yes or No
     Type: String
-    Default: "Yes"
+    Default: "No"
     AllowedValues:
       - "Yes"
       - "No"      
@@ -79,7 +79,7 @@ Parameters:
   ReportPortalCert: # ReportPortal certificate ARN (Must be a valid certificate ARN that is registered with ReportPortal Domain URL)
     Description: ReportPortal SSL Certificate ARN
     Type: String
-    Default: arn:aws:acm:us-east-1:679916862468:certificate/69db26d8-ccce-459d-9aff-fe42d0faf2bd
+    Default: mydefaultcertificatefromawscrn
     ConstraintDescription: Must be a valid Certificate ARN that is registered with above URL   
 Conditions: 
   DeployWithSSL: !Equals [ !Ref ReportPortalDeploymentType, HTTPS ]
