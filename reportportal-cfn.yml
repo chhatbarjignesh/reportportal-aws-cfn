@@ -70,12 +70,12 @@ Parameters:
   DomainName: # Domain Name (Domain must be active in Route53 with one hosted zone)
     Description: Domain where you want to deploy ReportPortal
     Type: String
-    Default: ropensolutions.com
+    Default: yourdomain.com
     ConstraintDescription: Domain must be active in Route53 with One Hosted zone.
   ReportPortalDomain: # Reportportal sub domain e.g. reportportal.yourdomain.com
     Description: URL with subdomain where you want to deploy ReportPortal e.g. reportportal.yourdomaion.com
     Type: String
-    Default: reportportal.ropensolutions.com 
+    Default: reportportal.yourdomain.com 
   ReportPortalCert: # ReportPortal certificate ARN (Must be a valid certificate ARN that is registered with ReportPortal Domain URL)
     Description: ReportPortal SSL Certificate ARN
     Type: String
