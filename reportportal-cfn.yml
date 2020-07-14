@@ -612,7 +612,7 @@ Resources:
         Ref: WebAppALB
       Port: 80
       Protocol: HTTP
-  # # ReportPortal ALB Listener for HTTPS 
+  # #ReportPortal ALB Listener for HTTPS 
   SecureListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Condition: DeployWithSSL
