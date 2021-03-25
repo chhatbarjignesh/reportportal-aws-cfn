@@ -1,3 +1,6 @@
+# Latest Supported ReportPortal Version
+v5.3.5
+
 # ReportPortal with AWS CloudFormation
 Deploy and Upgrade ReportPortal using AWS CloudFormation
 
