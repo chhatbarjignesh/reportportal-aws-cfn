@@ -1,6 +1,9 @@
 # Latest Supported ReportPortal Version
 v5.3.5
 
+# Important Instructions
+Create KeyPair in EC2 and add it in yml
+Create S3 bucket and add it in yml
 # ReportPortal with AWS CloudFormation
 Deploy and Upgrade ReportPortal using AWS CloudFormation
 
