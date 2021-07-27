@@ -1,9 +1,10 @@
 # Latest Supported ReportPortal Version
-v5.3.5
+v5.4.0
 
 # Important Instructions
 Create KeyPair in EC2 and add it in yml
 Create S3 bucket and add it in yml
+To SSH in EC2 instance you need to create a bastion host in the newly created public subnet and then ssh into the EC2 as EC2 is in private subnet
 # ReportPortal with AWS CloudFormation
 Deploy and Upgrade ReportPortal using AWS CloudFormation
 

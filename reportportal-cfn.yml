@@ -3,7 +3,7 @@ Description: "A template to deploy reportportal"
 Parameters:
   ReportPortalVersion: # Version of ReportPortal you want to Deploy
     Type: String
-    Default: '5.2.2'
+    Default: '5.3.5'
     AllowedValues:
       - '5.0.0'
       - '5.1.0'
@@ -17,6 +17,7 @@ Parameters:
       - '5.3.3'
       - '5.3.4'
       - '5.3.5'
+      - '5.4.0'
   EnvironmentSize: # Environment size (Small, Medium, Large)
     Type: String
     Default: SMALL
@@ -450,6 +451,7 @@ Resources:
                 DATABASE_USER=${DBUser}
                 DATABASE_PASSWORD=${DBPassword}
                 BUCKET_URL=https://${S3BucketName}.s3.${AWS::Region}.amazonaws.com
+                SHORT_BUCKET_HOST=${S3BucketName}.s3.${AWS::Region}.amazonaws.com
                 AWS_REGION=${AWS::Region}
                 BUCKET_ACCESS_KEY=${S3UserKey}
                 BUCKET_SECRET_KEY=${S3UserKey.SecretAccessKey}
