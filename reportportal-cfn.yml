@@ -118,39 +118,37 @@ Mappings:
       CIDR: 10.0.3.0/24
   RegionMap:
     us-east-1:
-      AMALINUX: ami-0323c3dd2da7fb37d
+      AMALINUX: ami-02e136e904f3da870
     us-east-2:
-      AMALINUX: ami-0f7919c33c90f5b58
+      AMALINUX: ami-074cce78125f09d61
     us-west-1:
-      AMALINUX: ami-06fcc1f0bc2c8943f
+      AMALINUX: ami-03ab7423a204da002
     us-west-2:
-      AMALINUX: ami-0d6621c01e8c2de2c
+      AMALINUX: ami-013a129d325529d4d
     sa-east-1:
-      AMALINUX: ami-003449ffb2605a74c
+      AMALINUX: ami-05855ed85de7fbd77
     ca-central-1:
-      AMALINUX: ami-054362537f5132ce2
+      AMALINUX: ami-0a70476e631caa6d3
     eu-west-1:
-      AMALINUX: ami-06ce3edf0cff21f07
+      AMALINUX: ami-05cd35b907b4ffe77
     eu-west-2:
-      AMALINUX: ami-01a6e31ac994bbc09
+      AMALINUX: ami-02f5781cba46a5e8a
     eu-west-3:
-      AMALINUX: ami-00077e3fed5089981
+      AMALINUX: ami-0eb34a1ff6bafc83f
     eu-central-1:
-      AMALINUX: ami-076431be05aaf8080
+      AMALINUX: ami-058e6df85cfc7760b
     ap-southeast-1:
-      AMALINUX: ami-0ec225b5e01ccb706
+      AMALINUX: ami-073998ba87e205747
     ap-southeast-2:
-      AMALINUX: ami-0970010f37c4f9c8d
+      AMALINUX: ami-05c029a4b57edda9e
     ap-northeast-1:
-      AMALINUX: ami-0f310fced6141e627
+      AMALINUX: ami-0701e21c502689c31
     ap-northeast-2:
-      AMALINUX: ami-01288945bd24ed49a
+      AMALINUX: ami-0e4a9ad2eb120e054
     ap-south-1:
-      AMALINUX: ami-0470e33cd681b2476
-    cn-north-1:
-      AMALINUX: ami-8e6aa0e3
+      AMALINUX: ami-041d6256ed0f2061c
     eu-north-1:
-      AMALINUX: ami-0b7a46b4bd694e8a6
+      AMALINUX: ami-0d15082500b576303
   InstanceSize:
     SMALL:
       "EC2": "t2.medium"
