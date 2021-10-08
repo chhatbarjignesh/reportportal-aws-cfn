@@ -18,6 +18,7 @@ Parameters:
       - '5.3.4'
       - '5.3.5'
       - '5.4.0'
+      - '5.5.0'
   EnvironmentSize: # Environment size (Small, Medium, Large)
     Type: String
     Default: SMALL
