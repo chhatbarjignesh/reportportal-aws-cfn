@@ -1,5 +1,5 @@
 # Latest Supported ReportPortal Version
-v5.4.0
+v5.5.0
 
 # Important Instructions
 Create KeyPair in EC2 and add it in yml
