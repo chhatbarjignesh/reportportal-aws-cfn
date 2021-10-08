@@ -54,7 +54,7 @@ services:
     restart: always
 
   analyzer:
-    image: reportportal/service-auto-analyzer:5.4.0
+    image: reportportal/service-auto-analyzer:5.5.0
     environment:
       LOGGING_LEVEL: info
       AMQP_URL: amqp://rabbitmq:rabbitmq@rabbitmq:5672
@@ -67,9 +67,44 @@ services:
       - elasticsearch
     restart: always
 
+  analyzer_train: #an analyzer instance for training, don't forget to setup the same storage(either minio, or filesystem) as for main analyzer
+    image: reportportal/service-auto-analyzer:5.5.0
+    environment:
+      LOGGING_LEVEL: info
+      AMQP_URL: amqp://rabbitmq:rabbitmq@rabbitmq:5672
+      ES_HOSTS: http://elastic:elastic1q2w3e@elasticsearch:9200
+      MINIO_SHORT_HOST: ${SHORT_BUCKET_HOST}
+      MINIO_ACCESS_KEY: ${BUCKET_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${BUCKET_ACCESS_KEY}
+      INSTANCE_TASK_TYPE: train
+      UWSGI_WORKERS: 1
+    depends_on:
+      - elasticsearch
+    restart: always 
+
+  metrics-gatherer: # metrics service for analyzing how analyzer is working and manage retrained models
+    image: reportportal/service-metrics-gatherer:1.1.14
+    environment:
+      LOGGING_LEVEL: info
+      ES_HOST: http://elasticsearch:9200
+      ES_USER: elastic
+      ES_PASSWORD: elastic1q2w3e
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_PORT: 5432
+      ALLOWED_START_TIME: "22:00"
+      ALLOWED_END_TIME: "08:00"
+      #TZ: Europe/Minsk you can change a timezone like this to specify when metrics are gathered
+      AMQP_URL: amqp://rabbitmq:rabbitmq@rabbitmq:5672
+    depends_on:
+      - elasticsearch
+    restart: always       
+
   ### Initial reportportal db schema. Run once.
   db-scripts:
-    image: reportportal/migrations:5.4.0
+    image: reportportal/migrations:5.5.0
     environment:
       POSTGRES_SERVER: ${DB_HOST}
       POSTGRES_PORT: 5432
@@ -89,7 +124,7 @@ services:
     restart: always
 
   uat:
-    image: reportportal/service-authorization:5.4.0
+    image: reportportal/service-authorization:5.5.0
     environment:
       - RP_DB_HOST=${DB_HOST}
       - RP_DB_USER=${DATABASE_USER}
@@ -128,7 +163,7 @@ services:
     restart: always
 
   api:
-    image: reportportal/service-api:5.4.0
+    image: reportportal/service-api:5.5.0
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -161,7 +196,7 @@ services:
     restart: always
 
   jobs:
-    image: reportportal/service-jobs:5.4.0
+    image: reportportal/service-jobs:5.5.0
     environment:
       RP_DB_HOST: ${DB_HOST}
       RP_DB_USER: ${DATABASE_USER}
@@ -186,7 +221,7 @@ services:
     - traefik.http.services.jobs.loadbalancer.server.scheme=http
     - traefik.expose=true
   ui:
-    image: reportportal/service-ui:v5.4.0
+    image: reportportal/service-ui:5.5.0
     environment:
       - RP_SERVER_PORT=8080
     labels:
