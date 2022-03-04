@@ -15,7 +15,7 @@ version: '2.4'
 services:
 
   gateway:
-    image: traefik:v2.0.5
+    image: traefik:v2.0.7
     ports:
       - "8080:8080" # HTTP exposed
       - "8081:8081" # HTTP Administration exposed
@@ -35,6 +35,7 @@ services:
     volumes:
       - /var/data/elasticsearch:/usr/share/elasticsearch/data
     environment:
+      - "ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true"
       - "bootstrap.memory_lock=true"
       - "discovery.type=single-node"
       - "logger.level=INFO"
@@ -54,7 +55,7 @@ services:
     restart: always
 
   analyzer:
-    image: reportportal/service-auto-analyzer:5.5.0
+    image: reportportal/service-auto-analyzer:5.6.0
     environment:
       LOGGING_LEVEL: info
       AMQP_URL: amqp://rabbitmq:rabbitmq@rabbitmq:5672
@@ -68,7 +69,7 @@ services:
     restart: always
 
   analyzer_train: #an analyzer instance for training, don't forget to setup the same storage(either minio, or filesystem) as for main analyzer
-    image: reportportal/service-auto-analyzer:5.5.0
+    image: reportportal/service-auto-analyzer:5.6.0
     environment:
       LOGGING_LEVEL: info
       AMQP_URL: amqp://rabbitmq:rabbitmq@rabbitmq:5672
@@ -83,7 +84,7 @@ services:
     restart: always 
 
   metrics-gatherer: # metrics service for analyzing how analyzer is working and manage retrained models
-    image: reportportal/service-metrics-gatherer:1.1.14
+    image: reportportal/service-metrics-gatherer:1.1.17
     environment:
       LOGGING_LEVEL: info
       ES_HOST: http://elasticsearch:9200
@@ -104,7 +105,7 @@ services:
 
   ### Initial reportportal db schema. Run once.
   db-scripts:
-    image: reportportal/migrations:5.5.0
+    image: reportportal/migrations:5.6.0
     environment:
       POSTGRES_SERVER: ${DB_HOST}
       POSTGRES_PORT: 5432
@@ -124,7 +125,7 @@ services:
     restart: always
 
   uat:
-    image: reportportal/service-authorization:5.5.0
+    image: reportportal/service-authorization:5.6.3
     environment:
       - RP_DB_HOST=${DB_HOST}
       - RP_DB_USER=${DATABASE_USER}
@@ -147,7 +148,7 @@ services:
     restart: always
 
   index:
-    image: reportportal/service-index:5.0.10
+    image: reportportal/service-index:5.0.11
     depends_on:
       gateway:
         condition: service_started
@@ -163,7 +164,7 @@ services:
     restart: always
 
   api:
-    image: reportportal/service-api:5.5.0
+    image: reportportal/service-api:5.6.3
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -196,12 +197,21 @@ services:
     restart: always
 
   jobs:
-    image: reportportal/service-jobs:5.5.0
+    image: reportportal/service-jobs:5.6.3
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      gateway:
+        condition: service_started
     environment:
       RP_DB_HOST: ${DB_HOST}
       RP_DB_USER: ${DATABASE_USER}
       RP_DB_PASS: ${DATABASE_PASSWORD}
       RP_DB_NAME: ${DATABASE_NAME}
+      RP_AMQP_USER: rabbitmq
+      RP_AMQP_PASS: rabbitmq
+      RP_AMQP_APIUSER: rabbitmq
+      RP_AMQP_APIPASS: rabbitmq
       RP_BINARYSTORE_TYPE: minio
       RP_BINARYSTORE_MINIO_ENDPOINT: ${BUCKET_URL}
       RP_BINARYSTORE_MINIO_REGION: ${AWS_REGION}
@@ -221,7 +231,7 @@ services:
     - traefik.http.services.jobs.loadbalancer.server.scheme=http
     - traefik.expose=true
   ui:
-    image: reportportal/service-ui:5.5.0
+    image: reportportal/service-ui:5.6.0
     environment:
       - RP_SERVER_PORT=8080
     labels:
