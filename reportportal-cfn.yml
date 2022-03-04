@@ -3,7 +3,7 @@ Description: "A template to deploy reportportal"
 Parameters:
   ReportPortalVersion: # Version of ReportPortal you want to Deploy
     Type: String
-    Default: '5.5.0'
+    Default: '5.6.3'
     AllowedValues:
       - '5.0.0'
       - '5.1.0'
@@ -19,6 +19,7 @@ Parameters:
       - '5.3.5'
       - '5.4.0'
       - '5.5.0'
+      - '5.6.3'
   EnvironmentSize: # Environment size (Small, Medium, Large)
     Type: String
     Default: SMALL
@@ -118,37 +119,37 @@ Mappings:
       CIDR: 10.0.3.0/24
   RegionMap:
     us-east-1:
-      AMALINUX: ami-02e136e904f3da870
+      AMALINUX: ami-0c293f3f676ec4f90
     us-east-2:
-      AMALINUX: ami-074cce78125f09d61
+      AMALINUX: ami-08b6f2a5c291246a0
     us-west-1:
-      AMALINUX: ami-03ab7423a204da002
+      AMALINUX: ami-051317f1184dd6e92
     us-west-2:
-      AMALINUX: ami-013a129d325529d4d
+      AMALINUX: ami-0b9f27b05e1de14e9
     sa-east-1:
-      AMALINUX: ami-05855ed85de7fbd77
+      AMALINUX: ami-06a6cd930c86feb26
     ca-central-1:
-      AMALINUX: ami-0a70476e631caa6d3
+      AMALINUX: ami-0ba438e27012de9af
     eu-west-1:
-      AMALINUX: ami-05cd35b907b4ffe77
+      AMALINUX: ami-080af029940804103
     eu-west-2:
-      AMALINUX: ami-02f5781cba46a5e8a
+      AMALINUX: ami-060c4f2d72966500a
     eu-west-3:
-      AMALINUX: ami-0eb34a1ff6bafc83f
+      AMALINUX: ami-01d14e0ab732be0e4
     eu-central-1:
-      AMALINUX: ami-058e6df85cfc7760b
+      AMALINUX: ami-00e76d391403fc721
     ap-southeast-1:
-      AMALINUX: ami-073998ba87e205747
+      AMALINUX: ami-0abb8f6b71e7614d5
     ap-southeast-2:
-      AMALINUX: ami-05c029a4b57edda9e
+      AMALINUX: ami-089e8a52c00cede0b
     ap-northeast-1:
-      AMALINUX: ami-0701e21c502689c31
+      AMALINUX: ami-07b4f72c4c356c19d
     ap-northeast-2:
-      AMALINUX: ami-0e4a9ad2eb120e054
+      AMALINUX: ami-0029dbeb91e3b0f5f
     ap-south-1:
-      AMALINUX: ami-041d6256ed0f2061c
+      AMALINUX: ami-076754bea03bde973
     eu-north-1:
-      AMALINUX: ami-0d15082500b576303
+      AMALINUX: ami-06077dff17d5cd454
   InstanceSize:
     SMALL:
       "EC2": "t2.medium"
